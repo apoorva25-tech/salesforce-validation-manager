@@ -12,7 +12,7 @@ function Home() {
     const CLIENT_ID =
       "3MVG9GBhY6wQjl2vDb8Q4bY3wswb4beHLwYAxUDaxBsNf2yK26FH.f6b1QU7RNKP72r1ct537VfTz5QJpzy0x";
 
-    const REDIRECT_URI = "http://localhost:3000/callback";
+    const REDIRECT_URI = "https://salesforce-validation-manager-gamma.vercel.app/callback";
 
     const authUrl =
       `https://login.salesforce.com/services/oauth2/authorize` +
