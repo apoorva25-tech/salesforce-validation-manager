@@ -25,7 +25,7 @@ function Home() {
 
   const getValidationRules = async () => {
     try {
-      const response = await fetch("http://salesforce-validation-manager-sixr.onrender.com/validation-rules", {
+      const response = await fetch("https://salesforce-validation-manager-sixr.onrender.com/validation-rules", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ function Home() {
 
   const toggleRule = async (rule) => {
   try {
-    await fetch("http://salesforce-validation-manager-sixr.onrender.com/toggle-rule", {
+    await fetch("https://salesforce-validation-manager-sixr.onrender.com/toggle-rule", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
