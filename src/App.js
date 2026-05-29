@@ -9,8 +9,8 @@ function Home() {
   const [rules, setRules] = useState([]);
 
   const loginToSalesforce = () => {
-    const CLIENT_ID =
-      "3MVG9GBhY6wQjl2vDb8Q4bY3wswb4beHLwYAxUDaxBsNf2yK26FH.f6b1QU7RNKP72r1ct537VfTz5QJpzy0x";
+      const CLIENT_ID =
+  "3MVG9GBhY6wQjl2vDb8Q4bY3ws6lZMZoiYtib04q8RDdivPb_drDLZyuX71WCjdwIzQqk3_ZiID.0CSGrvvPy";
 
     const REDIRECT_URI = "https://salesforce-validation-manager-gamma.vercel.app/callback";
 
