@@ -11,25 +11,31 @@ app.get("/", (req, res) => {
   res.send("Backend Running");
 });
 
-app.post("/validation-rules", async (req, res) => {
-  const { accessToken, instanceUrl } = req.body;
+app.post("/toggle-rule", async (req, res) => {
+  const { accessToken, instanceUrl, ruleId, active } = req.body;
 
   try {
-    const response = await axios.get(
-      `${instanceUrl}/services/data/v59.0/tooling/query/?q=SELECT+Id,ValidationName,Active+FROM+ValidationRule`,
+    await axios.patch(
+      `${instanceUrl}/services/data/v59.0/tooling/sobjects/ValidationRule/${ruleId}`,
+      {
+        Metadata: {
+          active: active,
+        },
+      },
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
         },
       }
     );
 
-    res.json(response.data.records);
+    res.json({ success: true });
   } catch (error) {
     console.log(error.response?.data || error.message);
 
     res.status(500).json({
-      error: "Failed to fetch validation rules",
+      error: "Failed to toggle validation rule",
       details: error.response?.data || error.message,
     });
   }
