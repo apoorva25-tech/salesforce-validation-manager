@@ -15,7 +15,7 @@ app.post("/validation-rules", async (req, res) => {
 
   try {
     const response = await axios.get(
-      `${instanceUrl}/services/data/v59.0/tooling/query/?q=SELECT+FIELDS(ALL)+FROM+ValidationRule+LIMIT+1`,
+      `${instanceUrl}/services/data/v59.0/tooling/query/?q=SELECT+Id,ValidationName,Active+FROM+ValidationRule`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
