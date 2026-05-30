@@ -22,7 +22,7 @@ app.post("/validation-rules", async (req, res) => {
         },
       }
     );
-
+    console.log(response.data.records);
     res.json(response.data.records);
   } catch (error) {
     console.log(error.response?.data || error.message);
