@@ -55,6 +55,7 @@ app.post("/toggle-rule", async (req, res) => {
 
     res.json({ success: true });
   } catch (error) {
+    console.log("TOGGLE ERROR:", error.response?.data || error.message);
     console.log(error.response?.data || error.message);
 
     res.status(500).json({
