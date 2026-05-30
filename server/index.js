@@ -14,6 +14,19 @@ app.post("/validation-rules", async (req, res) => {
   const { accessToken, instanceUrl } = req.body;
 
   try {
+    const describeResponse = await axios.get(
+  `${instanceUrl}/services/data/v59.0/tooling/sobjects/ValidationRule/describe`,
+  {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  }
+);
+
+console.log(
+  "VALIDATION RULE FIELDS:",
+  describeResponse.data.fields.map((f) => f.name)
+);
     const response = await axios.get(
       `${instanceUrl}/services/data/v59.0/tooling/query/?q=SELECT+Id,ValidationName,Active,EntityDefinitionId,Metadata+FROM+ValidationRule`,
       {
