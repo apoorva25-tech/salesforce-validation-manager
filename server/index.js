@@ -28,7 +28,7 @@ console.log(
   describeResponse.data.fields.map((f) => f.name)
 );
     const response = await axios.get(
-      `${instanceUrl}/services/data/v59.0/tooling/query/?q=SELECT+Id,ValidationName,Active,EntityDefinitionId,Metadata+FROM+ValidationRule`,
+      `${instanceUrl}/services/data/v59.0/tooling/query/?q=SELECT+Id,ValidationName,Active,EntityDefinitionId+FROM+ValidationRule`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
