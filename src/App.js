@@ -51,20 +51,31 @@ function Home() {
     }
   };
 
-  const toggleRule = async (rule) => {
+ const toggleRule = async (rule) => {
   try {
-    await fetch("https://salesforce-validation-manager-sixr.onrender.com/toggle-rule", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        accessToken: token,
-        instanceUrl: instanceUrl,
-        ruleId: rule.Id,
-        active: !rule.Active,
-      }),
-    });
+    const response = await fetch(
+      "https://salesforce-validation-manager-sixr.onrender.com/toggle-rule",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          accessToken: token,
+          instanceUrl: instanceUrl,
+          ruleId: rule.Id,
+          active: !rule.Active,
+        }),
+      }
+    );
+
+    const data = await response.json();
+    console.log(data);
+
+    if (!response.ok) {
+      alert(data.error || "Toggle failed");
+      return;
+    }
 
     getValidationRules();
   } catch (error) {
