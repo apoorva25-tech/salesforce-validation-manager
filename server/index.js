@@ -15,7 +15,7 @@ app.post("/validation-rules", async (req, res) => {
 
   try {
     const response = await axios.get(
-      `${instanceUrl}/services/data/v59.0/tooling/query/?q=SELECT+Id,ValidationName,Active+FROM+ValidationRule`,
+      `${instanceUrl}/services/data/v59.0/tooling/query/?q=SELECT+Id,ValidationName,Active,EntityDefinitionId+FROM+ValidationRule`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -23,6 +23,7 @@ app.post("/validation-rules", async (req, res) => {
       }
     );
     console.log(response.data.records);
+    console.log(JSON.stringify(response.data.records, null, 2));
     res.json(response.data.records);
   } catch (error) {
     console.log(error.response?.data || error.message);
