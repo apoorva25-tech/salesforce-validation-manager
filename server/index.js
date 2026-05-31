@@ -28,7 +28,7 @@ console.log(
   describeResponse.data.fields.map((f) => f.name)
 );
     const response = await axios.get(
-      `${instanceUrl}/services/data/v59.0/tooling/query/?q=SELECT+Id,ValidationName,Metadata+FROM+ValidationRule+LIMIT+1`,
+      `${instanceUrl}/services/data/v59.0/tooling/query/?q=SELECT+Id,ValidationName,Active,EntityDefinitionId+FROM+ValidationRule`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -36,7 +36,7 @@ console.log(
       }
     );
     console.log(response.data.records);
-   console.log(JSON.stringify(response.data, null, 2));
+    console.log(JSON.stringify(response.data.records, null, 2));
     res.json(response.data.records);
   } catch (error) {
     console.log(error.response?.data || error.message);
@@ -52,38 +52,13 @@ app.post("/toggle-rule", async (req, res) => {
   const { accessToken, instanceUrl, ruleId, active } = req.body;
 
   try {
-    const ruleResponse = await axios.get(
-  `${instanceUrl}/services/data/v59.0/tooling/sobjects/ValidationRule/${ruleId}`,
-  {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  }
-);
-
-console.log(
-  "RULE DATA:",
-  JSON.stringify(ruleResponse.data, null, 2)
-);
-
-console.log("RULE ID:", ruleId);
-   const metadata = ruleResponse.data.Metadata;
-
-await axios.patch(
-  `${instanceUrl}/services/data/v59.0/tooling/sobjects/ValidationRule/${ruleId}`,
-  {
-    Metadata: {
-      ...metadata,
-      active: active,
-    },
-  },
-  {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-    },
-  }
-);
+    await axios.patch(
+      `${instanceUrl}/services/data/v59.0/tooling/sobjects/ValidationRule/${ruleId}`,
+      {
+        Metadata: {
+          active: active,
+        },
+      },
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
