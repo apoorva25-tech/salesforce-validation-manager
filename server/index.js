@@ -52,6 +52,21 @@ app.post("/toggle-rule", async (req, res) => {
   const { accessToken, instanceUrl, ruleId, active } = req.body;
 
   try {
+    const ruleResponse = await axios.get(
+  `${instanceUrl}/services/data/v59.0/tooling/sobjects/ValidationRule/${ruleId}`,
+  {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  }
+);
+
+console.log(
+  "RULE DATA:",
+  JSON.stringify(ruleResponse.data, null, 2)
+);
+
+console.log("RULE ID:", ruleId);
     await axios.patch(
       `${instanceUrl}/services/data/v59.0/tooling/sobjects/ValidationRule/${ruleId}`,
       {
