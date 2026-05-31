@@ -67,13 +67,23 @@ console.log(
 );
 
 console.log("RULE ID:", ruleId);
-    await axios.patch(
-      `${instanceUrl}/services/data/v59.0/tooling/sobjects/ValidationRule/${ruleId}`,
-      {
-        Metadata: {
-          active: active,
-        },
-      },
+   const metadata = ruleResponse.data.Metadata;
+
+await axios.patch(
+  `${instanceUrl}/services/data/v59.0/tooling/sobjects/ValidationRule/${ruleId}`,
+  {
+    Metadata: {
+      ...metadata,
+      active: active,
+    },
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  }
+);
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
